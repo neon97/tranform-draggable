@@ -22,7 +22,7 @@ class TransformDemoState extends State<TransformDemo> {
 
   @override
   initState() {
-    super.initState();
+    super.initState();  
     rotateValue = 0;
     threeDValue = 0;
     skewValue = 0;
@@ -32,7 +32,7 @@ class TransformDemoState extends State<TransformDemo> {
     position = Offset(0.0, height - 20);
   }
 
-  Draggable diagram() {
+   diagram() {
     return Draggable(
       child: mainCont(context),
       feedback: mainCont(context),
@@ -126,10 +126,20 @@ class TransformDemoState extends State<TransformDemo> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                setState(() {
+                  count++;
+                  print(count);
+                });
+              },
+            )
+          ],
         ),
         body: Stack(
           children: <Widget>[
-            
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
@@ -147,6 +157,7 @@ class TransformDemoState extends State<TransformDemo> {
                 transVt(),
               ],
             ),
+            //for (int i = 0; i <= count; i++)
             Positioned(
               left: position.dx,
               top: position.dy - height + 20,
@@ -195,19 +206,21 @@ class TransformDemoState extends State<TransformDemo> {
           ),
         ),
       ),
-    )
-    ;
+    );
   }
 
   Widget getCont(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image:AssetImage("images/text2.png",),fit: BoxFit.contain)
-      ),
-     
- 
+          image: DecorationImage(
+              image: AssetImage(
+                "images/text2.png",
+              ),
+              fit: BoxFit.contain)),
       width: width,
       height: height,
     );
   }
+
+  int count = 1;
 }
